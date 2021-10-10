@@ -1,0 +1,44 @@
+cd /etc/nginx/sites-available/
+mv default default.back
+cp default.back app
+nano app
+sudo ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/
+ls -lah ../sites-enabled/
+sudo nginx -t
+vi nginx.conf 
+rm sites-enabled/default 
+sudo nginx -t
+cp /var/www/html/index.nginx-debian.html ~/
+ls ~/
+rm /var/www/html/index.nginx-debian.html 
+git clone git@github.com:1volkman1/material-design-template.git /var/www/html/
+ls /var/www/html/
+systemctl restart nginx
+cd ~/material-design-template/
+cd www
+nano index.html 
+git add index.html 
+git commit -m "Change service names in index.html"
+git push
+----------------------------------------------------------------------------------
+app:
+# Default server configuration
+#
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+
+	root /var/www/html/www;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+	}
+
+}
