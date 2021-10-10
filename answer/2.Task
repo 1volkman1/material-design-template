@@ -1,0 +1,2 @@
+Add cron job
+*/1 *   *   *   *    /bin/sh -c 'cd  /home/igor/material-design-template && /usr/bin/git pull -q origin master'
