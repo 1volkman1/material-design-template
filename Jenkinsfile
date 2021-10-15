@@ -15,12 +15,12 @@ pipeline{
       parallel{
         stage('compressed JS'){
           steps{
-            sh 'cat www/js/* | xargs -I{file} uglifyjs -o www/min/{file} --compress'
+            sh 'ls www/js/ | xargs -I{file} uglifyjs -o www/min/{file} --compress'
           }
         }
         stage('compressed CSS'){
           steps{
-            sh 'cat www/css/* | xargs -I{file} cleancss -o www/min/compress.min.css'
+            sh 'ls www/css/ | xargs -I{file} cleancss -o www/min/{file}'
           }
         }
       }
