@@ -15,19 +15,19 @@ pipeline{
       parallel{
         stage('compressed JS'){
           steps{
-            sh 'cat www/js/* | uglifyjs -o www/min/compress.min.js --compress'
+            sh 'cat www/js/* | xargs -I{file} uglifyjs -o www/min/{file} --compress'
           }
         }
         stage('compressed CSS'){
           steps{
-            sh 'cat www/css/* | cleancss -o www/min/compress.min.css'
+            sh 'cat www/css/* | xargs -I{file} cleancss -o www/min/compress.min.css'
           }
         }
       }
     }
     stage('Archived'){
        steps{
-         sh "tar --exclude='.git' --exclude=www/js --exclude=www/css -czf mdt.tar.gz ."
+         sh "tar --exclude='.git' --exclude=www/js --exclude=www/css -czvf mdt.tar.gz *"
        }
     } 
   }
