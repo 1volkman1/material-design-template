@@ -27,7 +27,7 @@ pipeline{
     }
     stage('Archived'){
        steps{
-         sh 'tar -czf --exclude=.git --exclude=www/js --exclude=www/css /tmp/result.tar.gz .'
+         sh "tar --exclude='.git' --exclude=www/js --exclude=www/css -czf mdt.tar.gz ."
        }
     } 
   }
