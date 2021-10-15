@@ -24,11 +24,11 @@ pipeline{
           }
         }
       }
-     stage('Archived'){
+    }
+    stage('Archived'){
        steps{
          sh 'tar -czf --exclude=.git --exclude=www/js --exclude=www/css /tmp/result.tar.gz .'
        }
-      } 
-    }
+    } 
   }
 }
