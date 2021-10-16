@@ -1,9 +1,7 @@
 pipeline{
   triggers{
       pollSCM('H/5 * * * *')
-  }
-  triggers{
-        githubPush()
+      githubPush()
   }
   agent{
     label 'worker1'
