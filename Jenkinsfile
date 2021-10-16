@@ -27,8 +27,19 @@ pipeline{
     }
     stage('Archived'){
        steps{
-         sh "tar --exclude='.git' --exclude=www/js --exclude=www/css -czvf /tmp/mdt.tar.gz ."
+         sh "tar --exclude='.git' --exclude=www/js --exclude=www/css -czf /tmp/mdt.tar.gz ."
        }
     } 
+  }
+  post{
+      always{
+        archiveArtifacts artifacts: 'mdt.tar.gz'
+      }
+    	success{
+			  echo "Build success!"
+		  }
+		  failure{
+			  echo " Build failure. There was some error"
+		  }  
   }
 }
