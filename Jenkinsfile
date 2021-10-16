@@ -1,4 +1,7 @@
 pipeline{
+  triggers{
+      pollSCM('H/5 * * * *')
+  }
   agent{
     label 'worker1'
   }
@@ -27,7 +30,7 @@ pipeline{
     }
     stage('Archived'){
        steps{
-         sh "tar --exclude='.git' --exclude=www/js --exclude=www/css -czf /tmp/mdt.tar.gz ."
+         sh "tar --exclude=.git --exclude=www/js --exclude=www/css -czf /tmp/mdt.tar.gz ."
        }
     } 
   }
