@@ -65,6 +65,7 @@ archive result
 ````
 ![](9_Multibranch Pipeline.png)
 ![](10_Build_view.png)
+
 **[Check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile "Check out Jenkinsfile")**
 ------------
 
@@ -82,13 +83,12 @@ Add triggers `{ pollSCM('H/5 * * * *') }`
 ````
 ![](17_scm_poll.png)
 ![](16_git_polling_log.png)
-**[check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile  "check out Jenkinsfile")**
 
 ##### Enable ‘GitHub hook trigger for Git SCM polling’
 ````sh
 Add `githubPush()` to triggers section
 ````
-**[check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile  "check out Jenkinsfile")**
+
 ![](14_webhook_history.png)
 --------------
 ![](15_build_triggers.png)
