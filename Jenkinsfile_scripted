@@ -17,15 +17,16 @@ node("worker1"){
         parallel(stages)
     }
     stage('Archived'){
-         sh "tar --exclude=.git --exclude=www/js --exclude=www/css -czf /tmp/mdt.tar.gz ."
-         archiveArtifacts artifacts: '/tmp/mdt.tar.gz'
+         sh "mkdir -p result"
+         sh "tar --exclude=.git --exclude=www/js --exclude=www/css --exclude=result -czf result/mdt.tar.gz ."
+         archiveArtifacts artifacts: 'result/mdt.tar.gz'
     }
     stage('Push to artifactory'){
         def server = Artifactory.server 'jfrog'
         def uploadSpec = """{
                 "files": [
                     {
-                    "pattern": "/tmp/mdt.tar.gz",
+                    "pattern": "result/mdt.tar.gz",
                     "target": "mdt/artifact_v_${BUILD_ID}.tar.gz"
                     }
                 ]

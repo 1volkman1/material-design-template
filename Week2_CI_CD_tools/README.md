@@ -99,3 +99,28 @@ Add `githubPush()` to triggers section
 **[Check out Jenkinsfile_scripted](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile_scripted "Check out Jenkinsfile_scripted")**
 
 ![](18_Jenkins_scripted.png)
+------------
+
+### 7. Spin up VM with installed Artifactory
+````sh
+wget -qO - https://api.bintray.com/orgs/jfrog/keys/gpg/public.key | sudo apt-key add -
+echo "deb https://jfrog.bintray.com/artifactory-debs bionic main" | sudo tee /etc/apt/sources.list.d/jfrog.list
+sudo apt-get update
+sudo apt-get install jfrog-artifactory-oss
+sudo systemctl start artifactory
+sudo systemctl enable artifactory
+sudo systemctl status artifactory
+````
+Configure artifactory and add in Jenkins config
+![](19_Configure_Artifactory.png)
+![](20_Install_artifactory_plugin.png)
+![](23_Add_artifactory_in_jenkins_VM.png)
+------------
+
+### 8. Add new stage for publishing artifacts into Artifactory
+
+Add this stage to scripted pipeline **[Check out Jenkinsfile_scripted](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile_scripted "Check out Jenkinsfile_scripted")**
+
+![](21_result_work_with_push.png)
+![](22_saved_artifact_in_artifactory.png)
+
