@@ -1,0 +1,37 @@
+node("worker1"){
+    nodejs = tool 'nodejs16'
+    properties([pipelineTriggers([pollSCM('H/5 * * * *'),githubPush()])])
+    try{
+    stage('Checksum') { 
+        checkout scm
+    }
+    stage('Build'){
+        def stages = [:]
+
+        stages["compressed JS"] = {
+           sh 'ls www/js/ | xargs -I{file} uglifyjs -o www/min/{file} --compress'
+        }
+        stages["compressed CSS"] = {
+           sh 'ls www/css/ | xargs -I{file} cleancss -o www/min/{file}'
+        }
+        parallel(stages)
+    }
+    stage('Archived'){
+         sh "tar --exclude=.git --exclude=www/js --exclude=www/css -czf /tmp/mdt.tar.gz ."
+    }
+    }
+    catch (ex){
+        echo "Get error"
+    } 
+    stage('post'){
+      always{
+        archiveArtifacts artifacts: 'mdt.tar.gz'
+      }
+      success{
+		echo "Build success!"
+	  }
+	  failure{
+		echo " Build failure. There was some error"
+	  }  
+   }
+}
