@@ -26,6 +26,16 @@ node("worker1"){
     stage('post'){
       always{
         archiveArtifacts artifacts: 'mdt.tar.gz'
+        def server = Artifactory.server 'jfrog'
+        def uploadSpec = """{
+                "files": [
+                    {
+                    "pattern": "mdt.tar.gz",
+                    "target": "mdt/artifact_v_${BUILD_ID}.tar.gz"
+                    }
+                ]
+            }"""
+        server.upload spec: uploadSpec, failNoOp: true
       }
       if ( currentBuild.result == 'SUCCESS') {
 		echo "Build success!"
