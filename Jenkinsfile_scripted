@@ -9,10 +9,10 @@ node("worker1"){
         def stages = [:]
 
         stages["compressed JS"] = {
-           sh 'ls www/js/ | xargs -I{file} uglifyjs -o www/min/{file} --compress'
+           sh "ls www/js/ | xargs -I{file} uglifyjs -o www/min/{file} --compress"
         }
         stages["compressed CSS"] = {
-           sh 'ls www/css/ | xargs -I{file} cleancss -o www/min/{file}'
+           sh "ls www/css/ | xargs -I{file} cleancss -o www/min/{file}"
         }
         parallel(stages)
     }
@@ -27,10 +27,10 @@ node("worker1"){
       always{
         archiveArtifacts artifacts: 'mdt.tar.gz'
       }
-      success{
+      if ( currentBuild.result == 'SUCCESS') {
 		echo "Build success!"
 	  }
-	  failure{
+	  if (currentBuild.result == 'FAILURE'){
 		echo " Build failure. There was some error"
 	  }  
    }

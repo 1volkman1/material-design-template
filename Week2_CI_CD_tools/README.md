@@ -14,16 +14,16 @@ sudo systemctl status jenkins
 ````
 ##### setup custom port 8081 for Jenkins 
 Edit file /etc/default/jenkins `HTTP_PORT=8081`
-![](1_change_jenkins_port)
+![](1_change_jenkins_port.png)
 ````sh
 sudo systemctl restart jenkins
 ````
 ##### check and install plugins: GitHub and Role-based authorization strategy
-![](2_github_plugin)
-![](3_Role-based_plugin)
+![](2_github_plugin.png)
+![](3_Role-based_plugin.png)
 ##### add new user: jenkins-NAME(your fullname)
 User jenkins-iharadzinets created.
-![](4_jenkins_user)
+![](4_jenkins_user.png)
 ------------
 
 ### 2. Create Agent VM
@@ -43,14 +43,14 @@ chown jenkins:jenkins /var/lib/jenkins
 ````
 ##### connect agent to master node
 Add node using ssh-key from id_rsa 
-![](5_credentional_for_connect_worker)
-![](6_configure_worker1)
-![](7_list_of_workers)
+![](5_credentional_for_connect_worker.png)
+![](6_configure_worker1.png)
+![](7_list_of_workers.png)
 ------------
 
 ### 3. Configure tools: NodeJS
 ##### Add NodeJS installations with version of NodeJS and global npm packages to install (uglify-js, clean-css-cli)
-![](8_NodeJS)
+![](8_NodeJS.png)
 ------------
 
 ### 4. Create “Multibranch Pipeline” pipeline job (work inside Lab folder)
@@ -64,22 +64,22 @@ create tar archive (ignore .git, css and js folders)
 archive result
 ````
 **[Check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile "Check out Jenkinsfile")**
-![](9_Multibranch Pipeline)
-![](10_Build_view)
+![](9_Multibranch Pipeline.png)
+![](10_Build_view.png)
 ------------
 
 ### 5. Setup the GitHub webhook to trigger the jobs
 Generate private token for Jenkins (Saved as "Secret text" in Jenkins credentials)
-![](11_generate_personal_token)
-![](12_add_token_in_jenkins_credentials)
+![](11_generate_personal_token.png)
+![](12_add_token_in_jenkins_credentials.png)
 Creat a webhook in Github interface. Go to GitHub repository into Settings -> Webhooks -> Add Webhook 
-![](13_Creat_webhook_in_github)
+![](13_Creat_webhook_in_github.png)
 ##### Enable ‘Poll SCM’ in Job settings
 ````sh
 Add triggers `{ pollSCM('H/5 * * * *') }` 
 ````
-![](17_scm_poll)
-![](16_git_polling_log)
+![](17_scm_poll.png)
+![](16_git_polling_log.png)
 **[check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile  "check out Jenkinsfile")**
 
 ##### Enable ‘GitHub hook trigger for Git SCM polling’
@@ -87,9 +87,9 @@ Add triggers `{ pollSCM('H/5 * * * *') }`
 Add `githubPush()` to triggers section
 ````
 **[check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile  "check out Jenkinsfile")**
-![](14_webhook_history)
+![](14_webhook_history.png)
 --------------
-![](15_build_triggers)
+![](15_build_triggers.png)
 ------------
 
 ### 6. Use Scripted pipeline instead of declarative
