@@ -18,14 +18,9 @@ node("worker1"){
     }
     stage('Archived'){
          sh "tar --exclude=.git --exclude=www/js --exclude=www/css -czf /tmp/mdt.tar.gz ."
+         archiveArtifacts artifacts: 'mdt.tar.gz'
     }
-    }
-    catch (ex){
-        echo "Get error"
-    } 
-    stage('post'){
-      always{
-        archiveArtifacts artifacts: 'mdt.tar.gz'
+    stage('Push to artifactory'){
         def server = Artifactory.server 'jfrog'
         def uploadSpec = """{
                 "files": [
@@ -36,7 +31,12 @@ node("worker1"){
                 ]
             }"""
         server.upload spec: uploadSpec, failNoOp: true
-      }
+    }
+    }
+    catch (ex){
+        echo "Get error"
+    } 
+    stage('post'){
       if ( currentBuild.result == 'SUCCESS') {
 		echo "Build success!"
 	  }
