@@ -63,18 +63,19 @@ clean-css www/css -> www/min
 create tar archive (ignore .git, css and js folders)
 archive result
 ````
-**[Check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile "Check out Jenkinsfile")**
-
 ![](9_Multibranch Pipeline.png)
 ![](10_Build_view.png)
+**[Check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile "Check out Jenkinsfile")**
 ------------
 
 ### 5. Setup the GitHub webhook to trigger the jobs
 Generate private token for Jenkins (Saved as "Secret text" in Jenkins credentials)
 ![](11_generate_personal_token.png)
 ![](12_add_token_in_jenkins_credentials.png)
-Creat a webhook in Github interface. Go to GitHub repository into Settings -> Webhooks -> Add Webhook 
-![](13_Creat_webhook_in_github .png)
+
+Creat a webhook in Github interface. Go to GitHub repository into Settings -> Webhooks -> Add Webhook
+
+![](13_Creat_webhook_in_github.png)
 ##### Enable ‘Poll SCM’ in Job settings
 ````sh
 Add triggers `{ pollSCM('H/5 * * * *') }` 
