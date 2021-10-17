@@ -64,6 +64,7 @@ create tar archive (ignore .git, css and js folders)
 archive result
 ````
 **[Check out Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile "Check out Jenkinsfile")**
+
 ![](9_Multibranch Pipeline.png)
 ![](10_Build_view.png)
 ------------
@@ -73,7 +74,7 @@ Generate private token for Jenkins (Saved as "Secret text" in Jenkins credential
 ![](11_generate_personal_token.png)
 ![](12_add_token_in_jenkins_credentials.png)
 Creat a webhook in Github interface. Go to GitHub repository into Settings -> Webhooks -> Add Webhook 
-![](13_Creat_webhook_in_github.png)
+![](13_Creat_webhook_in_github .png)
 ##### Enable ‘Poll SCM’ in Job settings
 ````sh
 Add triggers `{ pollSCM('H/5 * * * *') }` 
@@ -94,6 +95,6 @@ Add `githubPush()` to triggers section
 
 ### 6. Use Scripted pipeline instead of declarative
 
-**[Check out scripted.Jenkinsfile](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile_scripted "Check out scripted.Jenkinsfile")**
+**[Check out Jenkinsfile_scripted](https://github.com/1volkman1/material-design-template/blob/master/Jenkinsfile_scripted "Check out Jenkinsfile_scripted")**
 
-
+![](18_Jenkins_scripted.png)
